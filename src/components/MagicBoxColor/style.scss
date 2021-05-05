@@ -1,0 +1,12 @@
+// Variable
+$width-height: 100px;
+.color-box {
+    display: inline-block;
+    width: $width-height;
+    height: $width-height;
+    margin: 20px;
+    border-radius: 6px;
+    text-align: center;
+    align-items: center;
+    transition: all 0.2s;
+}

@@ -1,0 +1,24 @@
+$backgroud-color: #e5e5e5;
+@function padding($a, $b) {
+    @return $a * $b;
+}
+@mixin border-radius {
+    border-radius: 6px;
+}
+.album {
+    background: $backgroud-color;
+    padding: padding(5, 4) * 1px padding(4, 5) * 1px;
+    margin: 0;
+    @include border-radius;
+    width: auto;
+    &__thumbnai {
+        & > img {
+            width: 100%;
+            @include border-radius;
+        }
+    }
+
+    &__name {
+        font-weight: 500;
+    }
+}
