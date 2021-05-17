@@ -17,6 +17,7 @@ import productApi from './api/productApi';
 import CounterFeature from './features/Counter';
 import styled from 'styled-components';
 import Header from './components/Header';
+import ProductsFeature from './features/Product';
 
 const Title = styled.h1`
     text-align: center;
@@ -39,7 +40,7 @@ function App() {
                 _limit: 10,
             };
             const productList = await productApi.getAll(params);
-            console.log(productList);
+            // console.log(productList);
         };
         fectProduct();
     }, []);
@@ -87,14 +88,14 @@ function App() {
 				</ul>
 			</header> */}
 			<Header />
-
-            <Title color="red">Home Page</Title>
+           	{/* <Title color="red">Home Page</Title> */}
             <Switch>
                 <Redirect from="/home" to="/" exact></Redirect>
                 <Route exact path="/" component={CounterFeature} />
                 <Route path="/todos-list" component={TodoFeatures} />
                 <Route path="/albums" component={AlbumFeature} />
                 <Route path="/color" component={ColorBox} />
+				<Route path="/product" component={ProductsFeature}/>
                 <Route path="/count" component={CountBox} />
                 <Route component={NotFound} />
             </Switch>

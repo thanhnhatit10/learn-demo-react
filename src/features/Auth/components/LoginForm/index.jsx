@@ -7,13 +7,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
     onSubmit: PropTypes.func,
 };
 
 const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(3),
         position: 'relative',
     },
     avatar: {
@@ -36,23 +37,17 @@ const useStyles = makeStyles((theme) => ({
         right: 0,
     }
 }));
-function RegisterForm(props) {
+function LoginForm(props) {
     const classes = useStyles();
     const { onSubmit } = props;
     const schema = yup.object().shape({
-        fullName: yup.string().required('Vui lòng nhập họ tên').test('Nhập trên 2 từ', 'Vui lòng nhập trên 2 kí tụ', (values)=> { 
-            return values.split(' ').length >= 2;
-        }),
-        email: yup.string().required('Vui lòng nhập email').email('Vui lòng nhập đúng định dạng email'),
-        password: yup.string().required('Vui lòng nhập mật khẩu').min(6, 'Vui lòng nhập trên 6 kí tự'),
-        retypePassword: yup.string().required('Vui lòng nhập lại mật khẩu').oneOf([yup.ref('password')], 'Mật khẩu không khớp'),
+        identifier: yup.string().required('Vui lòng nhập email').email('Vui lòng nhập đúng định dạng email'),
+        password: yup.string().required('Vui lòng nhập mật khẩu'),
     });
     const form = useForm({
         defaultValues: {
-            fullName: '',
-            email: '',
+            identifier: '',
             password: '',
-            retypePassword: '',
         },
         resolver: yupResolver(schema),
     });
@@ -71,19 +66,17 @@ function RegisterForm(props) {
                 <LockOutlined></LockOutlined>
             </Avatar>
             <Typography className={classes.title} component="h3" variant="h5">
-                Creacte an accout
+                    Sign In
             </Typography>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="fullName" label="Full name" form={form} />
-                <InputField name="email" label="Email" form={form} />
+                <InputField name="identifier" label="Email" form={form} />
                 <PasswordField name="password" label="Password" form={form} />
-                <PasswordField name="retypePassword" label="Re password" form={form} />
                 <Button disabled={isSubmitting} type="submit" className={classes.submit} variant="contained" fullWidth color="primary">
-                    Create an accout
+                    Sign In
                 </Button>
             </form>
         </div>
     );
 }
 
-export default RegisterForm;
+export default LoginForm;

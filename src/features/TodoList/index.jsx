@@ -102,7 +102,7 @@ function TodoList(props) {
     }
 
     function handleSearchChangeTerm(newFilter) {
-        console.log(newFilter);
+        // console.log(newFilter);
         setFilters({
             ...filters,
             _page: 1,

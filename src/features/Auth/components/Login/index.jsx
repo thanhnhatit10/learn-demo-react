@@ -1,17 +1,17 @@
 import { unwrapResult } from '@reduxjs/toolkit';
-import { register } from '../../userSlice';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import RegisterForm from '../RegisterForm';
 import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../userSlice';
+import LoginForm from '../LoginForm';
 
 
-Register.propTypes = {
+Login.propTypes = {
     onCloseDialog: PropTypes.func.isRequired,
 };
 
-function Register(props) {
+function Login(props) {
     const { onCloseDialog} = props;
     // làm thông báo khi thành công hoặc thất bại
     const { enqueueSnackbar } = useSnackbar();
@@ -19,11 +19,10 @@ function Register(props) {
     // const user = useSelector(state => state.user);
     const handleSubmit = async (values) => {
        try {
-            values.username = values.email;
-            const action = register(values);
+            const action = login(values);
             const resultAction = await dispatch(action);
             unwrapResult(resultAction);
-            enqueueSnackbar('Đăng kí thành công', {variant: 'success'});
+            enqueueSnackbar('Đăng nhập thành công', {variant: 'success'});
             if(onCloseDialog){
                 onCloseDialog(false);
             };
@@ -34,9 +33,9 @@ function Register(props) {
     };
     return (
         <div>
-            <RegisterForm onSubmit={handleSubmit} />
+            <LoginForm onSubmit={handleSubmit} />
         </div>
     );
 }
 
-export default Register;
+export default Login;
