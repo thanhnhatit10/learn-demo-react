@@ -14,6 +14,7 @@ function ProductsFeature(props) {
         <Box pt={5}>
             <Switch>
                 <Route path={match.url} component={ListPage} />
+
                 {/* <Route path={`${match.path}/:productId`} component={}/> */}
             </Switch>
         </Box>
